@@ -1,0 +1,1024 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nilkanth Productions</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        /* CSS for the High-Contrast Professional Dark Mode (Refined) */
+        :root {
+            --color-dark: #0A0A0A; /* Deeper Black for contrast */
+            --color-accent: #00E5E5; /* Bright Cyan/Teal */
+            --color-secondary: #1C1C1C; /* Dark Grey for card backgrounds */
+            --color-text-light: #F0F0F0;
+            --color-text-subtle: #A0A0A0;
+            --font-display: 'Montserrat', sans-serif;
+            --font-body: 'Poppins', sans-serif;
+            --gap-l: 5rem; 
+            --gap-m: 2rem;  
+            --gap-s: 1rem;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        
+        /* FIX 1: Global Image Responsiveness - Essential for preventing horizontal scroll */
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--color-dark);
+            color: var(--color-text-light);
+            font-family: var(--font-body);
+            line-height: 1.6;
+            overflow-x: hidden;
+            position: relative; /* Needed for animated background */
+        }
+        
+        /* --- ANIMATED BACKGROUND EFFECT (Creative & Animative) --- */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+            background: 
+                /* Subtle matrix-like dots */
+                radial-gradient(circle, rgba(0, 229, 229, 0.1) 1px, transparent 1px) 0 0 / 50px 50px,
+                radial-gradient(circle, rgba(0, 229, 229, 0.05) 1px, transparent 1px) 25px 25px / 50px 50px;
+            animation: backgroundFlow 60s linear infinite;
+        }
+
+        @keyframes backgroundFlow {
+            from { background-position: 0 0, 25px 25px; }
+            to { background-position: 500px 500px, 525px 525px; }
+        }
+
+        /* --- UTILITIES & TYPOGRAPHY --- */
+        .container {
+            width: 90%;
+            max-width: 1280px;
+            margin: 0 auto;
+        }
+
+        h1, h2, h3 {
+            font-family: var(--font-display);
+            text-transform: uppercase;
+            letter-spacing: 0.1em; 
+            text-align: center;
+        }
+
+        h1 {
+            font-size: clamp(2.5rem, 5vw, 4.5rem); 
+            color: var(--color-accent);
+            text-shadow: 0 0 20px rgba(0, 229, 229, 0.7);
+            font-weight: 800;
+        }
+
+        h2 {
+            font-size: clamp(1.6rem, 3vw, 2.2rem); 
+            padding-bottom: 0.5rem;
+            margin-bottom: var(--gap-m);
+            /* FIX: Heading color is now LIGHT for high contrast */
+            color: var(--color-text-light);
+            font-weight: 600;
+        }
+
+        .section-padding {
+            padding: var(--gap-l) 0;
+        }
+        
+        /* --- HEADER & NAVIGATION --- */
+        header {
+            background: rgba(18, 18, 18, 0.95);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(0, 229, 229, 0.1);
+            backdrop-filter: blur(5px);
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 0;
+            min-height: 60px;
+            flex-wrap: nowrap;
+        }
+
+        /* FIX: Applying desktop layout properties directly to nav-links, removing logo-and-links container */
+        .nav-links {
+            display: flex;
+            align-items: center;
+            flex-grow: 1; /* Pushes the book button to the right */
+            justify-content: flex-start;
+        }
+
+        .nav-links a {
+            color: var(--color-text-light);
+            text-decoration: none;
+            text-transform: uppercase;
+            margin-left: 2rem; 
+            font-family: var(--font-display);
+            font-size: 0.85rem; 
+            font-weight: 400;
+            transition: color 0.3s, text-shadow 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--color-accent);
+            text-shadow: 0 0 10px var(--color-accent);
+        }
+        
+        .nav-book-btn {
+            padding: 0.6rem 1.5rem; 
+            font-size: 0.85rem;
+            flex-shrink: 0; 
+        }
+        
+        /* --- MENU TOGGLE (Hidden on Desktop) --- */
+        .menu-toggle {
+            display: none; 
+            cursor: pointer;
+            font-size: 1.5rem;
+            color: var(--color-accent);
+        }
+
+        /* --- FOOTER Styling --- */
+        footer {
+            background: #0D0D0D; 
+            padding: 1.5rem 0;
+            border-top: 1px solid rgba(0, 229, 229, 0.2);
+            text-align: center;
+            font-size: 0.9rem;
+        }
+        footer .container p {
+            color: var(--color-text-subtle);
+            margin: 0;
+        }
+
+        /* --- HERO SECTION - Logo Focused --- */
+        #hero {
+            height: 75vh; 
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: transparent; 
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-logo-h1 {
+            height: clamp(150px, 30vw, 300px); 
+            filter: drop-shadow(0 0 30px rgba(0, 229, 229, 0.9)); 
+            margin-bottom: 1.5rem;
+        }
+
+        .hero-content p {
+            font-size: clamp(0.9rem, 1.8vw, 1.6rem); 
+            margin: var(--gap-s) 0 var(--gap-m) 0;
+            color: var(--color-text-subtle);
+            font-weight: 300;
+            letter-spacing: 0.1em;
+        }
+        
+        /* --- BUTTONS --- */
+        .btn-primary {
+            background: var(--color-accent);
+            color: var(--color-dark);
+            text-transform: uppercase;
+            font-family: var(--font-display);
+            padding: 0.7rem 2.5rem; 
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 25px rgba(0, 229, 229, 0.4);
+            text-decoration: none;
+            display: inline-block;
+            border-radius: 4px; 
+            font-size: 0.85rem; 
+            font-weight: 600;
+            letter-spacing: 0.1em;
+        }
+
+        .btn-primary:hover {
+            background: var(--color-text-light);
+            box-shadow: 0 0 35px var(--color-accent);
+            transform: translateY(-2px);
+        }
+
+        .card-book-btn {
+            margin-top: 1rem;
+            padding: 0.5rem 1rem;
+            font-size: 0.75rem;
+            width: 100%;
+            text-align: center; /* Ensures text is centered */
+        }
+        
+        /* --- SERVICE/PACKAGE GRIDS (Uniformity Mandate) --- */
+        .service-grid-base {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: var(--gap-m);
+            margin-top: var(--gap-m);
+            align-items: stretch; 
+        }
+
+        .card-base {
+            background: var(--color-secondary);
+            border: 1px solid rgba(0, 229, 229, 0.3);
+            padding: 1.5rem; 
+            transition: all 0.3s ease;
+            border-radius: 8px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        
+        .card-base:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0, 229, 229, 0.2);
+            background: #252525;
+        }
+
+        .card-base h3 {
+            color: var(--color-accent);
+            font-size: 1.6rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .card-base ul {
+            list-style: none;
+            text-align: left;
+            padding-top: var(--gap-s);
+            border-top: 1px dashed rgba(0, 229, 229, 0.1);
+            flex-grow: 1; 
+        }
+
+        .card-base li {
+            padding: 0.6rem 0;
+            display: flex;
+            align-items: center;
+            font-size: 0.95rem;
+            border-bottom: 1px dotted rgba(255, 255, 255, 0.1);
+            color: var(--color-text-subtle);
+        }
+        
+        .card-base li::before {
+            content: '✓';
+            color: var(--color-accent); 
+            font-weight: bold;
+            margin-right: 0.7rem;
+            font-size: 1.2rem;
+        }
+        
+        /* Package Specific Styling */
+        .package-card .price {
+            font-family: var(--font-display);
+            font-size: 2.5rem; 
+            color: var(--color-text-light);
+            margin: 0.4rem 0 0.8rem 0;
+            font-weight: 800;
+        }
+        
+        /* Individual Service Specific Styling */
+        .service-card .price-group {
+            margin-top: auto;
+            padding-top: 1rem;
+            border-top: 1px dashed rgba(0, 229, 229, 0.1);
+        }
+
+        .service-card .price {
+            font-family: var(--font-display);
+            font-size: 1.4rem; 
+            color: var(--color-accent);
+            font-weight: 600;
+        }
+
+        /* --- ABOUT US SECTION (Two Team Cards) --- */
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2.5rem; 
+            margin-top: var(--gap-m);
+        }
+
+        .team-member-card {
+            background: var(--color-secondary);
+            padding: var(--gap-m);
+            border-radius: 8px;
+            border-left: 5px solid var(--color-accent);
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .team-member-card img {
+            width: 100px; 
+            height: 100px;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 5px solid var(--color-accent);
+            margin: 0 auto 1.5rem auto;
+            box-shadow: 0 0 15px rgba(0, 229, 229, 0.5);
+        }
+
+        .team-member-card h3 {
+            font-size: 1.4rem;
+            margin-top: 0;
+        }
+        
+        .team-member-card h4 {
+            color: var(--color-text-subtle);
+            font-weight: 400;
+            margin-bottom: var(--gap-s);
+            font-size: 0.95rem;
+        }
+
+        .team-member-card p {
+            font-size: 0.95rem;
+            text-align: left;
+            margin: 0 auto;
+            max-width: 100%;
+        }
+
+        /* --- EXPERTISE LIST STYLING (UNIFORM SIZE) --- */
+        .expertise-list {
+            display: flex; 
+            flex-wrap: wrap;
+            justify-content: center; 
+            gap: 1rem; 
+            list-style: none;
+            padding: 0;
+            margin-top: 2rem;
+            max-width: 1000px;
+            margin-left: auto;
+            margin-right: auto;
+            text-align: center;
+        }
+
+        .expertise-list li {
+            background: var(--color-dark);
+            padding: 0.75rem 1.5rem; 
+            border-radius: 4px;
+            border: 1px solid rgba(0, 229, 229, 0.2);
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            font-size: 0.9rem;
+            font-family: var(--font-body); 
+            /* FIX: Service list items color remains accent */
+            color: var(--color-accent); 
+            transition: background 0.3s, box-shadow 0.3s, color 0.3s;
+            text-align: center;
+            flex-grow: 1;
+            flex-shrink: 0;
+            flex-basis: 300px; /* Set a consistent base width */
+            min-height: 50px; /* Ensure uniform height for all boxes */
+        }
+
+        .expertise-list li:hover {
+            background: #121212;
+            box-shadow: 0 0 15px rgba(0, 229, 229, 0.5);
+            color: var(--color-text-light); 
+        }
+
+        .expertise-list svg {
+            display: none; /* Hide the icons */
+        }
+
+
+        /* --- CONTACT/FORM SECTION (Visible Form Layout) --- */
+        #contact {
+            background-color: var(--color-secondary);
+        }
+
+        .contact-layout {
+            display: grid;
+            grid-template-columns: 1.5fr 1fr; 
+            gap: var(--gap-m);
+            margin-top: var(--gap-m);
+        }
+
+        /* VISIBLE BOOKING FORM STYLING */
+        .booking-form-panel {
+            background: var(--color-dark);
+            padding: 1.5rem; 
+            border-radius: 8px;
+            border: 1px solid var(--color-accent);
+            box-shadow: 0 0 15px rgba(0, 229, 229, 0.4);
+        }
+
+        .booking-form-panel h3 {
+            color: var(--color-text-light);
+            text-align: center;
+            margin-bottom: var(--gap-s);
+            font-size: 1.5rem;
+        }
+        
+        .whatsapp-form label {
+            display: block;
+            margin-top: 1.2rem;
+            font-family: var(--font-display);
+            font-size: 0.85rem;
+            color: var(--color-accent);
+            font-weight: 600;
+        }
+
+        .whatsapp-form input, 
+        .whatsapp-form select, 
+        .whatsapp-form textarea {
+            width: 100%;
+            padding: 12px;
+            margin-top: 6px;
+            border: 1px solid rgba(0, 229, 229, 0.3);
+            background-color: #121212;
+            color: var(--color-text-light);
+            font-family: var(--font-body);
+            border-radius: 4px;
+            transition: border-color 0.3s;
+        }
+        
+        .whatsapp-form input:focus, 
+        .whatsapp-form select:focus, 
+        .whatsapp-form textarea:focus {
+            border-color: var(--color-accent);
+            outline: none;
+            box-shadow: 0 0 8px rgba(0, 229, 229, 0.5);
+        }
+
+        .whatsapp-form .btn-primary {
+            width: 100%;
+            margin-top: var(--gap-m);
+        }
+        
+        /* Error/Success Message Box */
+        #messageBox {
+            margin-top: 15px; 
+            padding: 10px; 
+            border-radius: 4px;
+            font-size: 0.9rem;
+            text-align: center;
+            display: none;
+        }
+
+        /* --- CONTACT INFO PANEL STYLING (The area next to the form) --- */
+        .contact-info-box {
+            text-align: left; /* Ensure text alignment is clean */
+            margin-bottom: 1.5rem;
+        }
+        .contact-info-box h3 {
+            color: var(--color-text-light);
+            margin-bottom: 0.25rem;
+            font-size: 1.2rem;
+            text-align: left; 
+            letter-spacing: 0.05em;
+        }
+        .contact-info-box a {
+            color: var(--color-accent);
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s;
+            display: block;
+            font-family: var(--font-display);
+            font-size: 0.95rem;
+        }
+        .contact-info-box a:hover {
+            color: var(--color-text-light);
+            text-decoration: underline;
+        }
+        .contact-info-box p {
+            font-size: 0.85rem;
+            color: var(--color-text-subtle);
+            margin: 0.5rem 0 0 0;
+            text-align: left; 
+        }
+        
+        /* --- MEDIA QUERIES for 1000% RESPONSIVENESS FIXES --- */
+        
+        /* Intermediate Tablets/Small Desktop (max-width: 1024px) */
+        @media (max-width: 1024px) {
+            .section-padding {
+                padding: 4rem 0; /* Slightly reduced vertical padding */
+            }
+            .contact-layout {
+                grid-template-columns: 1fr; /* Stack the contact form and info vertically */
+                max-width: 600px; /* Center and restrict max width for better reading flow */
+                margin-left: auto;
+                margin-right: auto;
+            }
+            .team-grid {
+                gap: 1.5rem;
+            }
+            .nav-links a {
+                margin-left: 1.5rem; /* Reduced link spacing */
+            }
+            /* Expertise list items now take up 45% of width to fit two columns */
+            .expertise-list li {
+                 flex-basis: 45%; 
+                 min-height: 45px;
+            }
+        }
+
+        /* Small Devices (Up to 768px) */
+        @media (max-width: 768px) {
+            .navbar {
+                 padding: 10px 20px; 
+            }
+            
+            /* 1. Hide the desktop links wrapper */
+            /* Removed, since it's no longer in the HTML, fixing the menu bug */
+
+            /* 2. Order elements correctly: Toggle (Left) | Book Now (Right) */
+            .menu-toggle { 
+                display: block; 
+                order: -1; 
+                margin-left: 0;
+            }
+            
+            /* 3. Show NAVBAR BOOK BUTTON ON MOBILE (Right side) */
+            .nav-book-btn {
+                display: block; 
+                order: 1; 
+                padding: 0.4rem 1rem; /* Smaller button for mobile */
+                font-size: 0.75rem;
+            }
+            
+            /* Dropdown Menu Styling FIX: Now controlling the nav directly */
+            .nav-links { 
+                display: none; /* Default hidden state for mobile */
+                flex-direction: column; 
+                position: absolute; 
+                top: 60px; 
+                left: 0; 
+                width: 100%; 
+                background: var(--color-dark); 
+                border-top: 1px solid rgba(0, 229, 229, 0.2); 
+                padding: var(--gap-s) 0; 
+                z-index: 999; /* Ensure menu is above other content */
+            }
+            .nav-links.active { 
+                display: flex; /* Show menu when active */
+            }
+            .nav-links a { 
+                margin: 0; 
+                padding: 15px 20px; 
+                width: 100%; 
+                text-align: center; 
+                border-bottom: 1px solid rgba(0, 229, 229, 0.1); 
+            }
+
+            /* General Mobile Sizing */
+            .section-padding {
+                padding: 3rem 0;
+            }
+            .team-grid {
+                gap: 1.5rem;
+            }
+
+            /* Hero Tagline Mobile Size (NEW) */
+            .hero-content p {
+                font-size: 0.9rem; /* Smaller tagline on mobile */
+                margin-bottom: 1.5rem;
+            }
+            
+            /* Hero Book Button Mobile Size (NEW) */
+            #hero .btn-primary {
+                padding: 0.5rem 1.2rem;
+                font-size: 0.8rem;
+            }
+
+            /* Expertise List Mobile: Full width stacking */
+            .expertise-list li {
+                flex-basis: 100%; 
+            }
+            
+            /* Card Grid Flow */
+            .service-grid-base {
+                grid-template-columns: 1fr; /* Force single column on smallest screens */
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header & Navigation -->
+    <header>
+        <div class="container navbar">
+            
+            <!-- FIX: Navigation is now outside the old wrapper (removing .logo-and-links container) -->
+            <nav class="nav-links" id="navLinks">
+                <a href="#about">About Us</a>
+                <a href="#expertise">Expertise</a>
+                <a href="#packages">Packages</a>
+                <a href="#services">Services</a>
+                <a href="#projects">Projects</a>
+            </nav>
+            
+            <!-- Mobile Menu Toggle Button (Left on Mobile) -->
+            <div class="menu-toggle" id="menuToggle">&#9776;</div>
+            
+            <!-- Book Now button on the right -->
+            <a href="#project-form" class="btn-primary nav-book-btn">Book Now</a>
+        </div>
+    </header>
+
+    <!-- 01. Hero Section -->
+    <section id="hero">
+        <div class="hero-content">
+            <!-- Logo Image, larger and responsive -->
+            <img src="Nilkanth Productions Logo.png" alt="Nilkanth Productions" class="hero-logo-h1">
+            <p>Lights. Camera. Action.</p>
+            <a href="#packages" class="btn-primary">View Our Packages</a>
+        </div>
+    </section>
+
+    <!-- 02. About Us Section -->
+    <section id="about" class="section-padding">
+        <div class="container">
+            <h2 style="width: 100%;">About The Vision</h2>
+            
+            <!-- Overall Philosophy Section -->
+            <div style="text-align: center; max-width: 900px; margin: 0 auto 3rem auto;">
+                <h3 style="color: var(--color-accent); font-size: 1.4rem; margin-bottom: 1rem; letter-spacing: 0.1em;">Art Meets Authenticity</h3>
+                <p style="font-size: 0.95rem; color: var(--color-text-light); font-weight: 300;">We blend imagination with technology. Transforming ideas into visually striking stories that leave a lasting impact. With creative direction, powerful storytelling, and cinematic execution at the core, we bring art and authenticity to every frame. Our goal is simple: to create visuals that don’t just look good, but feel good.</p>
+            </div>
+            
+            <!-- Team Grid - Two Image Layout (Uniform) -->
+            <div class="team-grid">
+                
+                <!-- Smit's Card -->
+                <div class="team-member-card">
+                    <img src="Smit.jpg" alt="Smit Sapariya">
+                    <h3>Smit Sapariya</h3>
+                    <h4>Cinematographer & Client Relations Head</h4>
+                    <p>I capture the soul of every story through my lens. With a strong sense of framing, lighting, and timing, I ensure each shot reflects the intended mood and message with precision. My focus is not only on visuals but also on creating a smooth and professional experience for our clients.</p>
+                </div>
+                
+                <!-- Harsh's Card -->
+                <div class="team-member-card">
+                    <img src="Harsh.jpg" alt="Harsh Soni">
+                    <h3>Harsh Soni</h3>
+                    <h4>Creative Director & Post-Production Head</h4>
+                    <p>I shape every project from concept to completion. Writing stories, screenplays, and dialogues. In post-production, I handle editing, motion design, and sound design with music direction, giving each video a cinematic rhythm and emotional depth that truly connects with the audience.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- 03. EXPERTISE SECTION (New position) -->
+    <section id="expertise" class="section-padding" style="background-color: #0D0D0D;">
+        <div class="container" style="text-align: center;">
+            <!-- FIX: Heading color changed to white -->
+            <h2 style="color: var(--color-text-light); font-size: 1.5rem; margin-bottom: 1rem; letter-spacing: 0.1em;">Service Expertise</h2>
+            
+            <ul class="expertise-list">
+                <li>BUSINESS & BRAND PROMOTION</li>
+                <li>EVENTS & OCCASIONS</li>
+                <li>CORPORATE & PROFESSIONAL</li>
+                <li>EDUCATIONAL & INFORMATIVE</li>
+                <li>AI REELS & CREATIVE</li>
+                <li>SOUND & EMOTIONAL DEPTH</li>
+            </ul>
+        </div>
+    </section>
+
+
+    <!-- 04. Service Packages Section (New position) -->
+    <section id="packages" class="section-padding" style="background-color: var(--color-dark);">
+        <div class="container">
+            <h2 style="width: 100%;">Premium Packages</h2>
+            <div class="packages-grid service-grid-base">
+                
+                <!-- SILVER Package -->
+                <div class="package-card card-base" data-package="SILVER - 10 Reels (30s)">
+                    <div>
+                        <h3>SILVER</h3>
+                        <p class="price">₹ 5,999 <span>/ Month</span></p>
+                    </div>
+                    <ul>
+                        <li>10 Reels & 30 Seconds Duration</li>
+                        <li>03 Posts Included</li>
+                        <li>Shooting + Editing + Account Handling</li>
+                        <li>Ideal for Business Promotion & Content Starter</li>
+                    </ul>
+                    <a href="#project-form" class="btn-primary card-book-btn">Book SILVER</a>
+                </div>
+
+                <!-- GOLD Package -->
+                <div class="package-card card-base" data-package="GOLD - 10 Reels (60s)">
+                    <div>
+                        <h3>GOLD</h3>
+                        <p class="price">₹ 9,999 <span>/ Month</span></p>
+                    </div>
+                    <ul>
+                        <li>10 Reels & 60 Seconds Duration</li>
+                        <li>03 Posts Included</li>
+                        <li>Shooting + Editing + Account Handling</li>
+                        <li>Enhanced Content & Reach Strategy</li>
+                    </ul>
+                    <a href="#project-form" class="btn-primary card-book-btn">Book GOLD</a>
+                </div>
+
+                <!-- PLATINUM Package -->
+                <div class="package-card card-base" data-package="PLATINUM - Full-Spectrum">
+                    <div>
+                        <h3>PLATINUM</h3>
+                        <p class="price">₹ 14,999 <span>/ Month</span></p>
+                    </div>
+                    <ul>
+                        <li>10 Reels & 60 Seconds Duration</li>
+                        <li>05 Posts + 01 Ad Film</li>
+                        <li>Shooting + Editing + Account Handling</li>
+                        <li>Full-Spectrum Brand Domination</li>
+                    </ul>
+                    <a href="#project-form" class="btn-primary card-book-btn">Book PLATINUM</a>
+                </div>
+
+            </div>
+        </div>
+    </section>
+    
+    <!-- 05. Detailed Services Section (Individual) (New position) -->
+    <section id="services" class="section-padding" style="background-color: #0D0D0D;">
+        <div class="container">
+            <h2 style="width: 100%;">Individual Services</h2>
+            <div class="services-grid service-grid-base">
+                
+                <!-- AD FILMS -->
+                <div class="service-card card-base" data-package="AD FILMS (UPTO 3 MINS)">
+                    <div>
+                        <h3>AD FILMS (UPTO 3 MINS)</h3>
+                        <ul>
+                            <li>Story Development & Script Writing</li>
+                            <li>Shooting & Editing</li>
+                            <li>Professional Sound Designing</li>
+                            <li>Cinematic Color Grading & Dubbing</li>
+                        </ul>
+                    </div>
+                    <div class="price-group">
+                        <p class="price">₹ 3,499</p>
+                    </div>
+                    <a href="#project-form" class="btn-primary card-book-btn">Book AD FILM</a>
+                </div>
+
+                <!-- PRE-WEDDING -->
+                <div class="service-card card-base" data-package="PRE-WEDDING">
+                    <div>
+                        <h3>PRE-WEDDING</h3>
+                        <ul>
+                            <li>Location Selection & Story Development</li>
+                            <li>Shooting & Editing</li>
+                            <li>Cinematic Visuals & Coloring</li>
+                            <li>(Custom quotes available for full weddings)</li>
+                        </ul>
+                    </div>
+                    <div class="price-group">
+                        <p class="price">₹ 6,999</p>
+                    </div>
+                    <a href="#project-form" class="btn-primary card-book-btn">Book PRE-WEDDING</a>
+                </div>
+
+                <!-- REELS -->
+                <div class="service-card card-base" data-package="INDIVIDUAL REELS">
+                    <div>
+                        <h3>INDIVIDUAL REEL MAKING</h3>
+                        <ul>
+                            <li>Fast Turnaround & Viral Focus</li>
+                            <li>Educational & AI Reels</li>
+                            <li>Editing only or Shooting + Editing</li>
+                            <li>(Reels are charged per 30s/60s duration)</li>
+                        </ul>
+                    </div>
+                    <div class="price-group">
+                        <p class="price" style="font-size: 1.2rem;">30 Sec: ₹ 699</p>
+                        <p class="price" style="font-size: 1.2rem; margin-top: 5px;">60 Sec: ₹ 1,199</p>
+                    </div>
+                    <a href="#project-form" class="btn-primary card-book-btn">Book REELS</a>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- 06. PROJECTS SECTION -->
+    <section id="projects" class="section-padding" style="background-color: var(--color-dark);">
+        <div class="container" style="text-align: center;">
+            <h2 style="width: 100%;">Our Cinematic Portfolio</h2>
+            <div style="max-width: 800px; margin: 0 auto; padding-top: 1rem;">
+                <p style="font-size: 1.05rem; color: var(--color-text-subtle); margin-bottom: 2rem;">
+                    Click below to see our work.
+                </p>
+                <!-- Instagram Link: Text color changed to white/light -->
+                <a href="https://www.instagram.com/nilkanth_productions?igsh=bXBzdm5jNXJucXR2" class="btn-primary" style="background-color: transparent; border: 2px solid var(--color-accent); color: var(--color-text-light);">
+                    Click Here
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- 07. CONTACT/BOOKING SECTION (Visible Form) -->
+    <section id="project-form" class="section-padding" style="background-color: var(--color-secondary);">
+        <div class="container">
+            <h2 style="width: 100%;">Start A Project</h2>
+            <div class="contact-layout">
+                
+                <!-- Left Column: Contact Info -->
+                <div class="contact-info-panel">
+                    <div>
+                        <div class="contact-info-box">
+                            <h3 style="text-transform: none;">General Contact</h3>
+                            <a href="mailto:harshpala777@gmail.com">nilkanthproduction115@gmail.com</a>
+                            <p style="margin-top: 1.5rem; color: var(--color-text-subtle);">Connect with us for general inquiries or partnership opportunities.</p>
+                        </div>
+    
+                        <div class="contact-info-box">
+                            <h3 style="text-transform: none;">Smit Sapariya (Cinematographer)</h3>
+                            <a href="tel:7984642574">PHONE: 7984642574</a>
+                            <p style="font-size: 1rem; font-weight: 300;">Location: Rajkot</p>
+                        </div>
+    
+                        <div class="contact-info-box">
+                            <h3 style="text-transform: none;">Harsh Soni (Creative Director)</h3>
+                            <a href="tel:8849700048">PHONE: 8849700048</a>
+                            <p style="font-size: 1rem; font-weight: 300;">Location: Jamnagar</p>
+                        </div>
+                    </div>
+                    
+                    <p style="font-size: 0.8rem; color: #555; text-align: center; border-top: 1px dashed #282828; padding-top: 1rem;">
+                        All bookings are finalized via WhatsApp for faster service.
+                    </p>
+                </div>
+
+                <!-- Right Column: Visible Booking Form -->
+                <div class="booking-form-panel">
+                    <h3>Quick WhatsApp Booking</h3>
+                    <form id="whatsappForm" class="whatsapp-form">
+                        
+                        <label for="name">Your Full Name</label>
+                        <input type="text" id="name" required>
+
+                        <label for="city">City</label>
+                        <select id="city" required>
+                            <option value="" disabled selected>Select your city...</option>
+                            <!-- FIX: Only Rajkot and Jamnagar are available -->
+                            <option value="Rajkot">Rajkot</option>
+                            <option value="Jamnagar">Jamnagar</option>
+                        </select>
+
+                        <label for="serviceType">Service/Package Type</label>
+                        <select id="serviceType" required>
+                            <option value="" disabled selected>Select a service or package...</option>
+                            <optgroup label="Premium Packages">
+                                <option value="SILVER - 10 Reels (30s)">SILVER Package (₹ 5,999)</option>
+                                <option value="GOLD - 10 Reels (60s)">GOLD Package (₹ 9,999)</option>
+                                <option value="PLATINUM - Full-Spectrum">PLATINUM Package (₹ 14,999)</option>
+                            </optgroup>
+                            <optgroup label="Individual Services">
+                                <option value="AD FILMS (UPTO 3 MINS)">Ad Films (₹ 3,499)</option>
+                                <option value="PRE-WEDDING">Pre-Wedding (₹ 6,999)</option>
+                                <option value="REEL 30s">Individual Reel - 30s (₹ 699)</option>
+                                <option value="REEL 60s">Individual Reel - 60s (₹ 1,199)</option>
+                                <option value="Other Service Inquiry">Other Service Inquiry</option>
+                            </optgroup>
+                        </select>
+
+                        <label for="description">Description of Service (Optional)</label>
+                        <textarea id="description" rows="3" placeholder="Tell us more about your vision, date, or specific requirements..."></textarea>
+
+                        <button type="submit" class="btn-primary">Send Booking Request on WhatsApp</button>
+                    </form>
+
+                     <div id="messageBox"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Nilkanth Productions. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const form = document.getElementById('whatsappForm');
+            const messageBox = document.getElementById('messageBox');
+            const menuToggle = document.getElementById('menuToggle');
+            const navLinks = document.getElementById('navLinks');
+            
+            // --- Menu Toggle (Mobile) ---
+            menuToggle.addEventListener('click', () => {
+                navLinks.classList.toggle('active');
+            });
+            
+            navLinks.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', () => {
+                    navLinks.classList.remove('active');
+                });
+            });
+
+            // --- Service Card Pre-selection Logic ---
+            const bookButtons = document.querySelectorAll('.card-book-btn');
+            const serviceTypeSelect = document.getElementById('serviceType');
+
+            bookButtons.forEach(button => {
+                button.addEventListener('click', (event) => {
+                    event.preventDefault(); 
+                    
+                    const card = button.closest('.card-base');
+                    if (card) {
+                        const serviceName = card.getAttribute('data-package');
+                        if (serviceName) {
+                            // Scroll to the form section
+                            document.getElementById('project-form').scrollIntoView({ behavior: 'smooth' });
+
+                            // Set the dropdown value to automatically select the service
+                            serviceTypeSelect.value = serviceName;
+                        }
+                    }
+                });
+            });
+
+            // --- Form Submission Logic (Conditional Routing) ---
+            const showMessage = (text, isError = true) => {
+                messageBox.style.display = 'block';
+                messageBox.textContent = text;
+                messageBox.style.background = isError ? 'rgba(255, 0, 0, 0.2)' : 'rgba(37, 211, 102, 0.2)';
+                messageBox.style.borderColor = isError ? 'red' : '#25D366';
+                messageBox.style.border = '1px solid ' + (isError ? 'red' : '#25D366');
+                setTimeout(() => {
+                    messageBox.style.display = 'none';
+                }, 5000);
+            };
+
+            form.addEventListener('submit', (event) => {
+                event.preventDefault();
+
+                const name = document.getElementById('name').value.trim();
+                const city = document.getElementById('city').value;
+                const serviceType = document.getElementById('serviceType').value;
+                const description = document.getElementById('description').value.trim() || 'No additional details provided.';
+                
+                // Define the phone numbers with the country code prefix (91)
+                const smitPhoneNumber = '917984642574'; 
+                const harshPhoneNumber = '918849700048'; // Harsh's number (your number)
+
+                let targetPhoneNumber;
+
+                // FINAL ROUTING LOGIC: Rajkot to Smit, Jamnagar to Harsh
+                if (city === 'Jamnagar') {
+                    targetPhoneNumber = harshPhoneNumber;
+                } else if (city === 'Rajkot') {
+                    targetPhoneNumber = smitPhoneNumber;
+                } else {
+                    // Safety fallback, though only two options are available now
+                    targetPhoneNumber = smitPhoneNumber; 
+                }
+
+
+                if (!name || !city || !serviceType) {
+                    showMessage('Please fill in all required fields.', true);
+                    return;
+                }
+
+                // Construct the URL-encoded message
+                const message = `*New Booking Request*\n\n` +
+                                `*Name:* ${name}\n` +
+                                `*City:* ${city}\n` +
+                                `*Service Type:* ${serviceType}\n` +
+                                `*Description:* ${description}\n\n`;
+                
+                const whatsappUrl = `https://wa.me/${targetPhoneNumber}?text=${encodeURIComponent(message)}`;
+
+                // Open WhatsApp link
+                window.open(whatsappUrl, '_blank');
+                
+                // Show success message and clear form 
+                showMessage('Opening WhatsApp with your pre-filled request! Please send the message.', false);
+                form.reset();
+            });
+        });
+    </script>
+
+</body>
+</html>
+
